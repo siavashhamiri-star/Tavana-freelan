@@ -1,0 +1,33 @@
+name: Tavana Freelan Android
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - run: npm install @capacitor/core@7 @capacitor/cli@7 @capacitor/android@7
+    - run: npm run build
+    - uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '17'
+    - uses: android-actions/setup-android@v3
+    - run: |
+        sdkmanager "platforms;android-35" "build-tools;35.0.0"
+        npx cap add android
+        npx cap sync android
+        cd android
+        chmod +x gradlew
+        ./gradlew assembleDebug bundleRelease
+    - uses: actions/upload-artifact@v4
+      with:
+        name: Tavana-Freelan-Android
+        path: |
+          android/app/build/outputs/apk/debug/*.apk
+          android/app/build/outputs/bundle/release/*.aab
