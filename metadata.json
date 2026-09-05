@@ -1,0 +1,6 @@
+{
+  "name": "Tavana AI Freelance & Creation Hub",
+  "description": "دستیار هوشمند ایرانی اکوسیستم شهر توانا برای تبدیل ایده به خدمت دیجیتال، تولید محتوا، مشاوره فریلنسری و انتشار در مسترهاب",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
